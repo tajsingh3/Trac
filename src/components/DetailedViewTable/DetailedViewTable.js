@@ -14,7 +14,6 @@ class DetailedViewTable extends Component{
         let sbu=null;
         let counter=null;
         for (let param of query.entries()) {
-            console.log(param);
             switch(param[0]){
                 case 'type':
                     type=param[1];
