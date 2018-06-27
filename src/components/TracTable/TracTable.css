@@ -27,3 +27,8 @@ td:hover {
 .AlertHighlight:hover{
     background-color: #ffe6e6;
 }
+
+a {
+    display: block;
+    text-decoration: none;
+}

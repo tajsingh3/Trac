@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import './App.css';
+import { Route } from 'react-router-dom'; 
+
 import TracTable from './components/TracTable/TracTable';
+import DetailedViewTable from './components/DetailedViewTable/DetailedViewTable';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          
-        </header>
-        <TracTable/>
-      </div>
+        <div>
+          <Route path='/' exact component={TracTable}/>
+          <Route path='/detailed-view-table' exact component={DetailedViewTable}/>          
+        </div>
     );
   }
 }

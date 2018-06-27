@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Spinner from '../UI/Spinner/Spinner';
+import { Link } from 'react-router-dom'; 
 
 import classes from './TracTable.css';
 
@@ -69,7 +70,16 @@ class TracTable extends Component {
             for(let sbuCol of sbuCols){              
                 let sbuData=allSbuData[sbuCol];
                 let classHighlight=this.addExpiredHighlight(countDataCol,sbuData);
-                tdRow.push(<td className={classHighlight}>{sbuData[countDataCol]}</td>);
+                tdRow.push(
+                    <td className={classHighlight}>
+                        <Link to={{
+                                    pathname:'/detailed-view-table',
+                                    search:'?type=policy&sbu='+sbuCol+'&counter='+countDataCol
+                                }}>
+                                    {sbuData[countDataCol]}
+                        </Link>
+                    </td>
+                );
             }
             trRows.push(<tr>{tdRow}</tr>);
         }
