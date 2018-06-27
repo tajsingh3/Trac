@@ -7,3 +7,7 @@ Table Loading Data
 Table Displaying Analysed Data (with expired policies/procedures in pink)
 ![tractable](https://user-images.githubusercontent.com/33178924/41939533-28b4be4c-7964-11e8-8664-a8c411f6f976.JPG)
 
+After clicking on a count value the appropriate detailedview should be displayed (For example after clicking pink area)
+![capture](https://user-images.githubusercontent.com/33178924/42000437-a8a4c2e4-7a2e-11e8-87c8-4b1e895d8dc9.JPG)
+
+
