@@ -3,20 +3,20 @@ import React, { Component } from 'react';
 class DetailedViewTable extends Component{
     state={
         rows:null,
-        type:null,
+        description:null,
         sbu:null,
         counter:null      
     }
 
     componentDidMount=()=>{
         const query = new URLSearchParams(this.props.location.search);
-        let type=null;
+        let description=null;
         let sbu=null;
         let counter=null;
         for (let param of query.entries()) {
             switch(param[0]){
-                case 'type':
-                    type=param[1];
+                case 'description':
+                    description=param[1];
                     break;
                 case 'sbu':
                     sbu=param[1];
@@ -29,7 +29,7 @@ class DetailedViewTable extends Component{
             } 
         }
         this.setState({
-            type:type,
+            description:description,
             sbu:sbu,
             counter:counter
         });
@@ -40,7 +40,7 @@ class DetailedViewTable extends Component{
             <div>
                 <h1>DetailedViewTable</h1>
                 <p>filter trac table base on...</p>
-                <p>type: {this.state.type}</p>
+                <p>description: {this.state.description}</p>
                 <p>sbu: {this.state.sbu}</p>
                 <p>counter name: {this.state.counter}</p>                        
             </div>

@@ -74,7 +74,7 @@ class TracTable extends Component {
                     <td className={classHighlight}>
                         <Link to={{
                                     pathname:'/detailed-view-table',
-                                    search:'?type=policy&sbu='+sbuCol+'&counter='+countDataCol
+                                    search:'?description=policy&sbu='+sbuCol+'&counter='+countDataCol
                                 }}>
                                     {sbuData[countDataCol]}
                         </Link>
