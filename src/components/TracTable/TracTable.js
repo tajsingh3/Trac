@@ -87,10 +87,11 @@ class TracTable extends Component {
     }
 
     addExpiredHighlight=(countDataCol,sbuData)=>{
+        const EXPIRED_LIMIT=1;
         let classHighlight=null;
         if(countDataCol==='Expired'){
             let expiredValue=sbuData[countDataCol];
-            if(expiredValue>=1){
+            if(expiredValue>=EXPIRED_LIMIT){
                 classHighlight=classes.AlertHighlight;
             }
         }
