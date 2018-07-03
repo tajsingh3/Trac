@@ -76,14 +76,15 @@ class SimpleTable extends Component {
         let colNames=this.state.data.colNames;
         let allSbuData=this.state.data.sbus;
         let trRows=[];
+        
         for(let rowName of rowNames){
             let tdRow=[];
-            tdRow.push(<TableCell numeric>{rowName}</TableCell>);
+            tdRow.push(<TableCell>{rowName}</TableCell>);
             for(let colName of colNames){              
                 let sbuData=allSbuData[colName];
                 let classHighlight=this.addExpiredHighlight(rowName,sbuData);
                 tdRow.push(
-                    <TableCell numeric className={classHighlight}>
+                    <TableCell className={classHighlight}>
                         <Link to={{
                                     pathname:'/detailed-view-table',
                                     search:'?description=policy&sbu='+colName+'&counter='+rowName
@@ -101,6 +102,7 @@ class SimpleTable extends Component {
     addExpiredHighlight=(countDataCol,sbuData)=>{
         const EXPIRED_LIMIT=1;
         let classHighlight=null;
+        
         if(countDataCol==='Expired'){
             let expiredValue=sbuData[countDataCol];
             if(expiredValue>=EXPIRED_LIMIT){
@@ -116,18 +118,18 @@ class SimpleTable extends Component {
 
         return (
                 <Paper className={classes.root}>
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell numeric>Count Data</TableCell>
-                            <TableCell numeric>Corporate</TableCell>
-                            <TableCell numeric>Retail</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {trRows}
-                    </TableBody>
-                </Table>
+                    <Table className={classes.table}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell >Count Data</TableCell>
+                                <TableCell >Corporate</TableCell>
+                                <TableCell >Retail</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {trRows}
+                        </TableBody>
+                    </Table>
                 </Paper>
         );
     }  
