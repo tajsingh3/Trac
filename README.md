@@ -1,4 +1,4 @@
-# Trac
+# TracUI
 This react app analyzes a csv file containing data about policies and procedures within an organization. After the analyses, a summary is displayed and important data needing immediate attention is highlighted to provide fast feedback for managers.
 
 Table Loading Data
