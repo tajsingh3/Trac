@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class DetailedViewTable extends Component{
     state={
         rows:null,
         description:null,
         sbu:null,
-        counter:null      
+        counter:null,
+        data:null      
     }
 
     componentDidMount=()=>{
@@ -13,6 +15,7 @@ class DetailedViewTable extends Component{
         let description=null;
         let sbu=null;
         let counter=null;
+
         for (let param of query.entries()) {
             switch(param[0]){
                 case 'description':
@@ -28,6 +31,15 @@ class DetailedViewTable extends Component{
                     console.log('Error: query string params do not match anything');
             } 
         }
+
+        axios.get(`http://127.0.0.1:8000/sbulist/${description}/${sbu}/${counter}`)
+            .then((response)=>{
+                this.setState({data:response.data});
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
+
         this.setState({
             description:description,
             sbu:sbu,

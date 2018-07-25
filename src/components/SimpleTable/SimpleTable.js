@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom'; 
+import axios from 'axios';
+import Spinner from '../UI/Spinner/Spinner';
 
 import classesH from './SimpleTable.css'; 
 
@@ -25,61 +27,84 @@ const styles = theme => ({
 class SimpleTable extends Component {
 
     state={
-        data:{
-            rowNames:[
-                'Approved',
-                'Unapproved',
-                'Expired',
-                'Unexpired',
-                'Regulatory',
-                'Non Regulatory',
-                'Daily Frequency',
-                'Weekly Frequency',
-                'Monthly Frequency',
-                'Annual Frequency'
-            ],
-            colNames:[
-                'Corporate',
-                'Retail'
-            ],
-            sbus:{
-                'Corporate':{
-                    'Approved':4,
-                    'Unapproved':0,
-                    'Expired':1,
-                    'Unexpired':4,
-                    'Regulatory':4,
-                    'Non Regulatory':0,
-                    'Daily Frequency':0,
-                    'Weekly Frequency':0,
-                    'Monthly Frequency':0,
-                    'Annual Frequency':4
-                },
-                'Retail':{
-                    'Approved':5,
-                    'Unapproved':0,
-                    'Expired':0,
-                    'Unexpired':4,
-                    'Regulatory':4,
-                    'Non Regulatory':0,
-                    'Daily Frequency':0,
-                    'Weekly Frequency':0,
-                    'Monthly Frequency':0,
-                    'Annual Frequency':0
-                }
-            }              
+        data:null
+    };
+
+    componentDidMount=()=>{
+        axios.get('http://127.0.0.1:8000/sbuset/')
+            .then((response)=>{
+                console.log(response.data);
+                this.setState({data:response.data})
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
+    }
+
+    cleanRowName=(rowName)=>{
+        let cleanedRowName = null;
+
+        switch(rowName){
+            case 'approved':
+                cleanedRowName = 'Approved';
+                break;
+            case 'unapproved':
+                cleanedRowName = 'Unapproved';
+                break;
+            case 'expired_yes':
+                cleanedRowName = 'Expired';
+                break;
+            case 'expired_no':
+                cleanedRowName = 'Unexpired';
+                break;
+            case 'reg_yes':
+                cleanedRowName = 'Regulatory';
+                break;
+            case 'reg_no':
+                cleanedRowName = 'Non Regulatory';
+                break;
+            case 'freq_daily':
+                cleanedRowName = 'Daily Frequency';
+                break;
+            case 'freq_weekly':
+                cleanedRowName = 'Weekly Frequency';
+                break;
+            case 'freq_monthly':
+                cleanedRowName = 'Monthly Frequency';
+                break;
+            case 'freq_annually':
+                cleanedRowName = 'Annual Frequency';
+                break;
+            default:
+                cleanedRowName = rowName;
         }
+
+        return cleanedRowName;
     }
 
     createTableRows=()=>{
-        let rowNames=this.state.data.rowNames;
-        let colNames=this.state.data.colNames;
-        let allSbuData=this.state.data.sbus;
+        let rowNames=[
+            'approved',
+            'unapproved',
+            'expired_yes',
+            'expired_no',
+            'reg_yes',
+            'reg_no',
+            'freq_daily',
+            'freq_weekly',
+            'freq_monthly',
+            'freq_annually'
+        ];
+        let colNames=[
+            'corporate',
+            'retail'
+        ];
+        let allSbuData=this.state.data;
         let trRows=[];
         
         for(let rowName of rowNames){
             let tdRow=[];
-            tdRow.push(<TableCell>{rowName}</TableCell>);
+            tdRow.push(<TableCell>{this.cleanRowName(rowName)}</TableCell>);
             for(let colName of colNames){              
                 let sbuData=allSbuData[colName];
                 let classHighlight=this.addExpiredHighlight(rowName,sbuData);
@@ -103,7 +128,7 @@ class SimpleTable extends Component {
         const EXPIRED_LIMIT=1;
         let classHighlight=null;
         
-        if(countDataCol==='Expired'){
+        if(countDataCol==='expired_yes'){
             let expiredValue=sbuData[countDataCol];
             if(expiredValue>=EXPIRED_LIMIT){
                 classHighlight=classesH.AlertHighlight;
@@ -114,24 +139,29 @@ class SimpleTable extends Component {
 
     render(){
         const { classes } = this.props;
-        let trRows=this.createTableRows();
+        let table=<Spinner/>;
 
-        return (
-                <Paper className={classes.root}>
-                    <Table className={classes.table}>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell >Count Data</TableCell>
-                                <TableCell >Corporate</TableCell>
-                                <TableCell >Retail</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {trRows}
-                        </TableBody>
-                    </Table>
-                </Paper>
-        );
+        if(this.state.data){
+            let trRows=this.createTableRows();
+            table = (
+                    <Paper className={classes.root}>
+                        <Table className={classes.table}>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell >Count Data</TableCell>
+                                    <TableCell >Corporate</TableCell>
+                                    <TableCell >Retail</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {trRows}
+                            </TableBody>
+                        </Table>
+                    </Paper>
+            );
+        }
+
+        return (table);
     }  
 }
 
