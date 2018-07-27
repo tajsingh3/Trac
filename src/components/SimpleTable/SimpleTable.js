@@ -97,7 +97,15 @@ class SimpleTable extends Component {
         ];
         let colNames=[
             'corporate',
-            'retail'
+            'retail',
+            'treasury',
+            'financial',
+            'operations',
+            'humanResources',
+            'investments',
+            'rmc',
+            'accounts',
+            'infotech'
         ];
         let allSbuData=this.state.data;
         let trRows=[];
@@ -151,6 +159,14 @@ class SimpleTable extends Component {
                                     <TableCell >Count Data</TableCell>
                                     <TableCell >Corporate</TableCell>
                                     <TableCell >Retail</TableCell>
+                                    <TableCell >Treasury</TableCell>
+                                    <TableCell >Financial</TableCell>
+                                    <TableCell >Operations</TableCell>
+                                    <TableCell >Human Resources</TableCell>
+                                    <TableCell >investments</TableCell>
+                                    <TableCell >Rmc</TableCell>
+                                    <TableCell >Accounts</TableCell>
+                                    <TableCell >infotech</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

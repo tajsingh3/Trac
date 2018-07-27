@@ -32,8 +32,9 @@ class DetailedViewTable extends Component{
             } 
         }
 
-        axios.get(`http://127.0.0.1:8000/sbulist/${description}/${sbu}/${counter}`)
+        axios.get(`http://127.0.0.1:8000/tracentries/${description}/${sbu}/${counter}`)
             .then((response)=>{
+                console.log(response.data);
                 this.setState({data:response.data});
             })
             .catch((error)=>{
