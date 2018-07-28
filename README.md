@@ -5,7 +5,8 @@ This react app analyzes a csv file containing data about policies and procedures
 Table Displaying Analysed Data (with expired policies/procedures in pink)
 ![capture](https://user-images.githubusercontent.com/33178924/43296141-8d47e45e-9117-11e8-9a86-79d811023ec3.JPG)
 
-After clicking on a count value the appropriate detailedview should be displayed (For example after clicking pink area)
-![capture](https://user-images.githubusercontent.com/33178924/42000437-a8a4c2e4-7a2e-11e8-87c8-4b1e895d8dc9.JPG)
+After clicking on a count value the appropriate detailedview should be displayed (For example after clicking a value in pink area)
+![capture](https://user-images.githubusercontent.com/33178924/43357949-eee19d9a-9257-11e8-8f8f-b1cf2f96ce20.JPG)
+
 
 
